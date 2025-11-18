@@ -1,0 +1,268 @@
+/* ============================
+   FACILITATOR DASHBOARD LAYOUT
+   ============================ */
+
+.facilitator-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #e5eff6;
+  padding: 3rem 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================
+   PROFILE CARD
+   ============================ */
+
+.facilitator-profile {
+  background: #fff;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.facilitator-profile h2 {
+  color: #0f75bc;
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.facilitator-profile p {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* ============================
+   CALENDAR SECTION
+   ============================ */
+
+.calendar-section {
+  background: white;
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-section h3 {
+  color: #0f75bc;
+  margin-bottom: 1rem;
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+.event-date {
+  background: #0f75bc !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+/* ============================
+   ADMIN ACTION DROPDOWNS
+   ============================ */
+
+.admin-actions {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+.action-card {
+  background: #ffffff;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.action-header {
+  padding: 1.1rem 1.5rem;
+  background: #0f75bc;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.action-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.action-form {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.action-form input,
+.action-form select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #c7d7e2;
+  background: #f9fafe;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.action-form input:focus,
+.action-form select:focus {
+  border-color: #0f75bc;
+  outline: none;
+}
+
+.action-btn {
+  background: #0f75bc;
+  color: #fff;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: #0d5fa0;
+  transform: translateY(-2px);
+}
+
+/* ============================
+   EVENT GRID
+   ============================ */
+
+.event-grid {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.event-grid h3 {
+  color: #0f75bc;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.event-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #0f75bc;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.015);
+  background: #f5faff;
+}
+
+.event-card h4 {
+  text-align: center;
+  color: #0f75bc;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.event-type {
+  color: #3b79d3;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Expanded State ---------- */
+
+.event-card.expanded {
+  background: #eef5ff;
+  border-color: #3b79d3;
+}
+
+.event-details {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #d4e2f2;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-height: 500px;
+  opacity: 1;
+  transition: all 0.35s ease;
+}
+
+/* ============================
+   DELETE BUTTON
+   ============================ */
+
+.delete-btn {
+  background: #ff5c5c;
+  border: none;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #d64545;
+  transform: scale(1.05);
+}
+
+/* Subtle hover highlight */
+.event-summary h4 {
+  transition: color 0.2s ease;
+}
+
+.event-card:hover .event-summary h4 {
+  color: #0d5fa0;
+}
+
+/* General spacing for dividers */
+.action-form > * {
+  margin-bottom: 0.5rem;
+}
+
+/** Floating Header **/
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.input-wrapper input:not(:placeholder-shown) + label,
+.input-wrapper input:focus + label {
+  top: -8px;
+  font-size: 2ch;
+  color: #555;
+}

@@ -1,0 +1,140 @@
+/* styles.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif, Courier, monospace;
+  text-align: center;
+}
+
+/* Navbar styles - apply globally or move to Navbar.css */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  padding: 25px;
+  border-bottom: 2px solid #e3e3e3;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  z-index: 1000;
+}
+
+nav a {
+  text-decoration: none;
+  color: #929292;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  color: green;
+}
+
+nav a.active {
+  color: black;
+  font-weight: 700;
+}
+
+/* Center page content */
+.page-center {
+  min-height: calc(100vh - 90px); /* viewport minus navbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center; /* horizontal center */
+  padding: 1rem;
+}
+
+/* Add your existing styles for buttons, video, products, form, etc. below */
+
+/* Example for video-player */
+.video-player {
+  margin-top: 30px;
+  width: min(1100px, 100%);
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Example for products-container and items */
+.products-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 300px;
+  padding: 20px;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.item:nth-child(2) {
+  background-color: #7932ff;
+  color: white;
+}
+
+.item:last-child {
+  background-color: black;
+  color: white;
+}
+
+/* Form inputs */
+form {
+  margin-top: 30px;
+}
+
+input {
+  display: block;
+  margin: 0 auto 15px auto;
+  font: inherit;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  width: 300px;
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #722cff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #5c22cc;
+}
+
+/* CTA Button */
+#cta-button {
+  text-decoration: none;
+  text-transform: uppercase;
+  background: linear-gradient(to right, blue, blue);
+  display: inline-block;
+  padding: 1em 3em;
+  font-weight: 600;
+  border-radius: 1000px;
+  transition: 150ms ease;
+  color: white;
+  margin-top: 20px;
+}
+
+#cta-button:hover {
+  transform: scale(1.1);
+}

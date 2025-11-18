@@ -1,0 +1,215 @@
+/* === Container & Layout === */
+.parent-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #e5eff6; /*linear-gradient(135deg, #f8f7ff, #e5e1ff);*/
+  padding: 3rem 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* === Profile Section === */
+.parent-profile {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 2rem 3rem;
+  margin: 0 auto 3rem auto;
+  max-width: 1200px;
+  width: 100%;
+  text-align: left;
+}
+
+.parent-profile h2 {
+  font-size: 2rem;
+  color: #0f75bc;
+  margin-bottom: 0.25rem;
+}
+
+.parent-email {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* === Events Section === */
+.parent-events {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.parent-events h3 {
+  color: #0f75bc;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* === Event Cards Grid === */
+.event-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* === Individual Event Card === */
+.event-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(59, 42, 191, 0.25);
+  background-color: #f9f9ff;
+}
+
+/* Expanded State */
+.event-card.expanded {
+  background-color: #eef5ff;
+  border-color: #4a90e2;
+}
+
+/* === Event Summary (Collapsed view) === */
+.event-summary {
+  transition: color 0.2s ease;
+}
+
+.event-card:hover .event-summary h4 {
+  color: #2a5db0;
+}
+
+.event-summary h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #0f75bc;
+}
+
+.event-summary p {
+  margin: 0.2rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* === Expandable Details Section === */
+.event-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border-top: 1px solid #eee;
+  margin-top: 0.8rem;
+  padding-top: 0;
+}
+
+.event-card.expanded .event-details {
+  max-height: 400px;
+  opacity: 1;
+  padding-top: 0.8rem;
+}
+
+/* === Absent Button === */
+.absent-btn {
+  margin-top: 0.6rem;
+  padding: 8px 14px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.absent-btn:hover {
+  background-color: #357abd;
+}
+
+.absent-btn.disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* === Calendar Section (if included later) === */
+.calendar-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.calendar-section h3 {
+  color: #0f75bc;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.react-calendar__tile {
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.event-date {
+  background: #7b5cff !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 50%;
+}
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.event-details {
+  margin-top: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.absent-btn {
+  margin-top: 1rem;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #d9534f;
+  color: white;
+  cursor: pointer;
+}
+
+.absent-btn.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

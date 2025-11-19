@@ -24,7 +24,7 @@ export default function VolunteerRegister() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Volunteer registration:", form);
+    //console.log("Volunteer registration:", form);
   };
 
   return (

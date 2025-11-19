@@ -18,7 +18,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      console.error(err);
+      // console.error(err);
       //console.log("---- LOGIN ATTEMPT ----");
       //console.log("Role:", role);
       //console.log("Email:", email);

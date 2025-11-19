@@ -261,7 +261,7 @@ export default function Facilitator() {
         waiver: true,
       });
 
-      alert("Parent created! (Password auto-set to 'password')");
+      //alert("Parent created! (Password auto-set to 'password')");
     } catch (err) {
       console.error("Parent create error:", err);
     }
@@ -311,7 +311,7 @@ export default function Facilitator() {
         preferred_school: "",
       });
 
-      alert("Volunteer created! (Password auto-set to 'password')");
+      //alert("Volunteer created! (Password auto-set to 'password')");
     } catch (err) {
       console.error("Volunteer create error:", err);
     }

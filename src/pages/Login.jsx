@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import "./Login.css";
+import "../stylings/Login.css";
 
 // API functions
 import { parentLogin, volunteerLogin } from "../auth/authAPI";
@@ -37,11 +37,11 @@ export default function Login() {
       // Store token + role in AuthProvider
       login(jwtToken, role); // ⭐ SEND BOTH TOKEN + ROLE
 
-      //alert("Login successful!");
+      // alert("Login successful!");
       setReadyToContinue(true);
     } catch (err) {
       console.error("Login FAILED:", err);
-      //alert("Invalid email or password");
+      // alert("Invalid email or password");
     }
   }
 

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import "./Facilitator.css";
-import "react-calendar/dist/Calendar.css";
+import "../stylings/Dashboard.css";
 import { useAuth } from "../auth/AuthProvider";
 
 const API = import.meta.env.VITE_API_URL;
@@ -13,11 +12,18 @@ export default function Facilitator() {
   const [facilitator, setFacilitator] = useState(null);
   const [events, setEvents] = useState([]);
   const [expandedEventId, setExpandedEventId] = useState(null);
+  const [editingEventId, setEditingEventId] = useState(null); // Track which event is in edit mode
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [editingEvent, setEditingEvent] = useState(null); // edit event
+  const [editingEvent, setEditingEvent] = useState(null); // edit event form data
 
   function handleEditEvent(event) {
-    setEditingEvent(event); // loads event into form
+    setEditingEventId(event.id); // Toggle edit mode for this event
+    setEditingEvent(event); // Load event data into form
+  }
+
+  function cancelEditEvent() {
+    setEditingEventId(null);
+    setEditingEvent(null);
   }
 
   // Dropdown sections
@@ -78,13 +84,16 @@ export default function Facilitator() {
     async function fetchData() {
       try {
         // Load facilitator profile
-        const profRes = await fetch(`${API}/volunteers/facilitator/${userId}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const profileData = await profRes.json();
+        const profileResponse = await fetch(
+          `${API}/volunteers/facilitator/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const profileData = await profileResponse.json();
         setFacilitator(profileData);
 
         // Load events for this facilitator
@@ -132,7 +141,7 @@ export default function Facilitator() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert("Failed to create event.");
+        // alert("Failed to create event.");
         return;
       }
 
@@ -147,7 +156,7 @@ export default function Facilitator() {
         endTime: "",
       });
 
-      alert("Event created!");
+      // alert("Event created!");
     } catch (err) {
       console.error("Event create error:", err);
     }
@@ -187,6 +196,17 @@ export default function Facilitator() {
       return;
     }
 
+    // Transform snake_case to camelCase for backend
+    const eventData = {
+      title: editingEvent.title,
+      type: editingEvent.type,
+      date: editingEvent.date,
+      startLocation: editingEvent.start_location,
+      endLocation: editingEvent.end_location,
+      startTime: editingEvent.start_time,
+      endTime: editingEvent.end_time,
+    };
+
     const res = await fetch(
       `${API}/volunteers/facilitator/${userId}/events/${id}`,
       {
@@ -195,7 +215,7 @@ export default function Facilitator() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(editingEvent),
+        body: JSON.stringify(eventData),
       }
     );
 
@@ -203,28 +223,32 @@ export default function Facilitator() {
 
     if (!res.ok) {
       console.error("Update failed:", text);
-      alert("Failed to update event.");
+      // alert("Failed to update event.");
       return;
     }
 
     const updated = JSON.parse(text);
 
-    //setEvents(events.map((ev) => (ev.id === id ? updated : ev)));
-
-    // setEvents((prev) =>
-    //   prev.map((ev) => (ev.id === updated.id ? updated : ev))
-    // );
+    // Transform camelCase response back to snake_case to match frontend data structure
+    const transformedUpdated = {
+      ...updated,
+      start_location: updated.startLocation || updated.start_location,
+      end_location: updated.endLocation || updated.end_location,
+      start_time: updated.startTime || updated.start_time,
+      end_time: updated.endTime || updated.end_time,
+    };
 
     setEvents((prev) =>
       prev.map((ev) =>
-        ev.id === updated.id
-          ? { ...updated } // ensures new object reference
+        ev.id === transformedUpdated.id
+          ? { ...transformedUpdated } // ensures new object reference
           : ev
       )
     );
 
+    setEditingEventId(null);
     setEditingEvent(null);
-    alert("Event updated!");
+    // alert("Event updated!");
   }
 
   /* ================================
@@ -248,7 +272,7 @@ export default function Facilitator() {
       );
 
       if (!res.ok) {
-        alert("Failed to create parent.");
+        // alert("Failed to create parent.");
         return;
       }
 
@@ -261,7 +285,7 @@ export default function Facilitator() {
         waiver: true,
       });
 
-      //alert("Parent created! (Password auto-set to 'password')");
+      // alert("Parent created! (Password auto-set to 'password')");
     } catch (err) {
       console.error("Parent create error:", err);
     }
@@ -297,7 +321,7 @@ export default function Facilitator() {
       );
 
       if (!res.ok) {
-        alert("Failed to create volunteer.");
+        // alert("Failed to create volunteer.");
         return;
       }
 
@@ -311,7 +335,7 @@ export default function Facilitator() {
         preferred_school: "",
       });
 
-      //alert("Volunteer created! (Password auto-set to 'password')");
+      // alert("Volunteer created! (Password auto-set to 'password')");
     } catch (err) {
       console.error("Volunteer create error:", err);
     }
@@ -325,109 +349,29 @@ export default function Facilitator() {
               RETURN UI
   ================================= */
   return (
-    <div className="facilitator-container">
-      <div className="facilitator-profile">
+    <div className="container">
+      <div className="profile">
         <h2>
           Welcome, {facilitator.first_name} {facilitator.last_name}
         </h2>
         <p>{facilitator.email}</p>
+        <p>{facilitator.phone}</p>
       </div>
 
-      <div className="calendar-section">
-        <h3>Event Calendar</h3>
-        <Calendar
-          onChange={setSelectedDate}
-          value={selectedDate}
-          tileClassName={({ date }) => {
-            const formatted = date.toISOString().split("T")[0];
-            return eventDates.includes(formatted) ? "event-date" : null;
-          }}
-        />
-      </div>
+      {/* Calendar */}
+      <h3>Event Calendar</h3>
+      <Calendar
+        onChange={setSelectedDate}
+        value={selectedDate}
+        tileClassName={({ date }) => {
+          const formatted = date.toISOString().split("T")[0];
+          return eventDates.includes(formatted) ? "event-date" : null;
+        }}
+      />
 
+      {/* Events */}
       <div className="event-grid">
         <h3>All Events</h3>
-
-        {editingEvent && (
-          <form
-            onSubmit={handleUpdateEvent}
-            className="edit-form"
-            key={editingEvent.id}
-          >
-            <h3>Edit Event</h3>
-
-            <input
-              type="text"
-              value={editingEvent.title}
-              onChange={(e) =>
-                setEditingEvent({ ...editingEvent, title: e.target.value })
-              }
-            />
-
-            <input
-              type="text"
-              value={editingEvent.type}
-              onChange={(e) =>
-                setEditingEvent({ ...editingEvent, type: e.target.value })
-              }
-            />
-
-            <input
-              type="text"
-              value={editingEvent.start_location}
-              onChange={(e) =>
-                setEditingEvent({
-                  ...editingEvent,
-                  start_location: e.target.value,
-                })
-              }
-            />
-
-            <input
-              type="text"
-              value={editingEvent.end_location}
-              onChange={(e) =>
-                setEditingEvent({
-                  ...editingEvent,
-                  end_location: e.target.value,
-                })
-              }
-            />
-
-            <input
-              type="date"
-              value={
-                editingEvent?.date
-                  ? new Date(editingEvent.date).toISOString().split("T")[0]
-                  : ""
-              }
-              onChange={(e) =>
-                setEditingEvent({ ...editingEvent, date: e.target.value })
-              }
-            />
-
-            <input
-              type="time"
-              value={editingEvent.start_time}
-              onChange={(e) =>
-                setEditingEvent({ ...editingEvent, start_time: e.target.value })
-              }
-            />
-
-            <input
-              type="time"
-              value={editingEvent.end_time}
-              onChange={(e) =>
-                setEditingEvent({ ...editingEvent, end_time: e.target.value })
-              }
-            />
-
-            <button type="submit">Save</button>
-            <button type="button" onClick={() => setEditingEvent(null)}>
-              Cancel
-            </button>
-          </form>
-        )}
 
         {events.map((event) => (
           <div
@@ -437,53 +381,203 @@ export default function Facilitator() {
             }`}
             onClick={() => toggleExpand(event.id)}
           >
-            <div className="event-header-row">
-              <h4>{event.title}</h4>
-              {expandedEventId === event.id ? <ChevronUp /> : <ChevronDown />}
-            </div>
+            {/* Event Summary */}
+            <div className="event-summary">
+              <div className="event-header">
+                <h4>{event.title}</h4>
 
-            <p className="event-type">{event.type}</p>
-            <p>
-              <strong>Start:</strong> {event.start_location}
-            </p>
-
-            {expandedEventId === event.id && (
-              <div className="event-details">
-                <p>
-                  <strong>Date:</strong> {event.date}
-                </p>
-                <p>
-                  <strong>Time:</strong> {event.start_time} – {event.end_time}
-                </p>
-                <p>
-                  <strong>End:</strong> {event.end_location}
-                </p>
-
-                <button
-                  className="delete-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteEvent(event.id);
-                  }}
+                <span
+                  className={`chevron ${
+                    expandedEventId === event.id ? "rotated" : ""
+                  }`}
                 >
-                  Delete Event
-                </button>
-
-                <button
-                  className="edit-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEditEvent(event);
-                  }}
-                >
-                  Edit Event
-                </button>
+                  {expandedEventId === event.id ? (
+                    <ChevronUp size={18} />
+                  ) : (
+                    <ChevronDown size={18} />
+                  )}
+                </span>
               </div>
-            )}
+
+              <p className="event-type">{event.type}</p>
+              <p>
+                <strong>Date:</strong> {event.date}
+              </p>
+
+              {expandedEventId === event.id && (
+                <div className="event-details">
+                  {editingEventId === event.id && editingEvent ? (
+                    // EDIT MODE: Show form inputs inline
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleUpdateEvent(e);
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-edit-form"
+                    >
+                      <div className="form-group">
+                        <label>Title</label>
+                        <input
+                          type="text"
+                          value={editingEvent.title}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              title: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Type</label>
+                        <input
+                          type="text"
+                          value={editingEvent.type}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              type: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Start Location</label>
+                        <input
+                          type="text"
+                          value={editingEvent.start_location}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              start_location: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>End Location</label>
+                        <input
+                          type="text"
+                          value={editingEvent.end_location}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              end_location: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Date</label>
+                        <input
+                          type="date"
+                          value={
+                            editingEvent?.date
+                              ? new Date(editingEvent.date)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              date: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>Start Time</label>
+                        <input
+                          type="time"
+                          value={editingEvent.start_time}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              start_time: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label>End Time</label>
+                        <input
+                          type="time"
+                          value={editingEvent.end_time}
+                          onChange={(e) =>
+                            setEditingEvent({
+                              ...editingEvent,
+                              end_time: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <div className="form-actions">
+                        <button type="submit" className="save-btn">
+                          Save
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            cancelEditEvent();
+                          }}
+                          className="cancel-btn"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    // VIEW MODE: Show event details
+                    <>
+                      <p>
+                        <strong>Time:</strong> {event.start_time} –{" "}
+                        {event.end_time}
+                      </p>
+                      <p>
+                        <strong>Start Location:</strong> {event.start_location}
+                      </p>
+                      <p>
+                        <strong>End Location:</strong> {event.end_location}
+                      </p>
+
+                      <button
+                        className="delete-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteEvent(event.id);
+                        }}
+                      >
+                        Delete Event
+                      </button>
+
+                      <button
+                        className="edit-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditEvent(event);
+                        }}
+                      >
+                        Edit Event
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
-
       {/* ============ ADMIN ACTIONS ============ */}
       <div className="admin-actions">
         {/* --- ADD EVENT --- */}
@@ -573,34 +667,6 @@ export default function Facilitator() {
             </form>
           )}
         </div>
-
-        {/* --- ADD PARENT --- */}
-        {/* <div className="action-card">
-          <div
-            className="action-header"
-            onClick={() => setShowAddParent(!showAddParent)}
-          >
-            <h4>Add Parent</h4>
-            {showAddParent ? <ChevronUp /> : <ChevronDown />}
-          </div>
-
-          {showAddParent && (
-            <form className="action-form" onSubmit={handleAddParent}>
-              {Object.keys(newParent).map((field) => (
-                <input
-                  key={field}
-                  placeholder={field.replace("_", " ").toUpperCase()}
-                  required
-                  value={newParent[field]}
-                  onChange={(e) =>
-                    setNewParent({ ...newParent, [field]: e.target.value })
-                  }
-                />
-              ))}
-              <button className="action-btn">Add Parent</button>
-            </form>
-          )}
-        </div> */}
 
         <div className="action-card">
           <div
@@ -715,6 +781,7 @@ export default function Facilitator() {
                   setNewVolunteer({ ...newVolunteer, email: e.target.value })
                 }
               />
+
               <input
                 placeholder="Phone Number"
                 required
@@ -723,16 +790,6 @@ export default function Facilitator() {
                   setNewVolunteer({ ...newVolunteer, phone: e.target.value })
                 }
               />
-
-              {/* <select
-                value={newVolunteer.interest}
-                onChange={(e) =>
-                  setNewVolunteer({ ...newVolunteer, interest: e.target.value })
-                }
-              >
-                <option value="repair">Repair</option>
-                <option value="rider">Rider</option>
-              </select> */}
 
               <input
                 placeholder="Interest"

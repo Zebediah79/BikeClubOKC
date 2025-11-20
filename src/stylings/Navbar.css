@@ -1,0 +1,168 @@
+/* ============================
+   Navbar Styles
+   ============================ */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #0f75bc;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-left a {
+  margin: 0;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nav-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-menu {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 6px;
+  padding: 10px 0;
+  width: 150px;
+  top: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.profile-dropdown button {
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: black;
+  font-size: 0.95rem;
+}
+
+.profile-dropdown button:disabled {
+  color: #999;
+}
+
+/* ============================
+   Mobile Responsive Design
+   ============================ */
+
+@layer mobile {
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 15px;
+    }
+
+    .nav-left {
+      gap: 15px;
+    }
+
+    .nav-left a {
+      font-size: 0.9rem;
+    }
+
+    .profile-menu {
+      font-size: 0.9rem;
+    }
+
+    .profile-dropdown {
+      width: 130px;
+      top: 35px;
+      padding: 8px 0;
+    }
+
+    .profile-dropdown button {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 8px 12px;
+    }
+
+    .nav-left {
+      gap: 10px;
+    }
+
+    .nav-left a {
+      font-size: 0.8rem;
+    }
+
+    .profile-menu {
+      font-size: 0.8rem;
+    }
+
+    .profile-dropdown {
+      width: 120px;
+      top: 30px;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    .profile-dropdown button {
+      padding: 5px 10px;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+/* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 25px;
+  border-bottom: 2px solid #e3e3e3;
+}
+
+nav a {
+  text-decoration: none;
+  color: #929292;
+  margin: 0 40px;
+}
+
+nav a:hover {
+  color: green;
+}
+
+nav a.active {
+  color: black;
+}
+
+/* Ensure page content doesn’t hide behind fixed navbar 
+body {
+  padding-top: 90px; /* same or slightly larger than nav height (25px padding + text height) 
+}*/

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css";
+import "../stylings/Register.css";
 
 export default function VolunteerRegister() {
   const [form, setForm] = useState({

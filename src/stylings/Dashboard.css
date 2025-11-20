@@ -1,0 +1,524 @@
+/* ============================
+   Dashboard Styles - All Dashboard Types
+   (Parents, Volunteers, Facilitators)
+   ============================ */
+
+h3 {
+  font-size: 2em;
+}
+/* Base container - centered and responsive */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #eddbc6;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================
+   Profile Section
+   ============================ */
+
+.profile {
+  background: #fff;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.profile h2,
+.profile p,
+.email {
+  color: #0f75bc;
+}
+
+.profile h2 {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.profile p,
+.email {
+  font-size: 1rem;
+  margin: 0 0 0.3rem 0;
+}
+
+.email {
+  color: #666;
+}
+
+/* ============================
+   Calendar Section
+   ============================ */
+
+.calendar-section {
+  background: white;
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-section h3 {
+  color: #0f75bc;
+  font-size: 1.4rem;
+  margin: 0 0 1rem 0;
+}
+
+.react-calendar {
+  width: 650px !important;
+  max-width: 100%;
+  margin: 0 auto 2rem;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+.react-calendar button {
+  font-size: 1.2rem;
+}
+
+.react-calendar__tile {
+  font-size: 1.2rem !important;
+  color: black;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+/* ============================
+   Event Grid & Cards
+   ============================ */
+
+.event-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.event-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #0f75bc;
+  margin-bottom: 1rem;
+}
+
+.event-card h4 {
+  text-align: center;
+  color: #0f75bc;
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.event-card p {
+  color: black;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.event-card.expanded {
+  background-color: #eef5ff;
+}
+
+.event-details {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #d4e2f2;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: none;
+}
+
+.event-details button {
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.event-card.expanded .event-details {
+  display: block;
+}
+
+.event-date {
+  background: #0f75bc;
+  color: black;
+  font-weight: bold;
+  border-radius: 50%;
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chevron {
+  color: #0f75bc;
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.event-summary h4 {
+  font-size: 1.2rem;
+  color: #0f75bc;
+  margin: 0 0 0.4rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* ============================
+   Event Grid Section
+   ============================ */
+
+.event-grid {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.event-grid h3 {
+  color: #0f75bc;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.6rem;
+}
+
+.event-type {
+  color: #3b79d3;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================
+   Events Table
+   ============================ */
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: white;
+}
+
+.events-table th,
+.events-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.events-table th {
+  background-color: #0f75bc;
+  color: white;
+  font-weight: 600;
+}
+
+.events-table tbody tr {
+  background: white;
+}
+
+/* ============================
+   Buttons - Consistent across dashboards
+   ============================ */
+
+.absent-btn,
+.decline-btn,
+.close-btn,
+.action-btn,
+.delete-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.absent-btn,
+.decline-btn {
+  background-color: #d9534f;
+  color: white;
+  margin-top: 1rem;
+}
+
+.absent-btn.disabled,
+.decline-btn.disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  background-color: #0f75bc;
+  color: white;
+  margin-top: 1rem;
+}
+
+.action-btn {
+  background: #0f75bc;
+  color: #fff;
+  padding: 0.9rem 1rem;
+}
+
+.delete-btn {
+  background: #ff5c5c;
+  color: white;
+  margin-top: 1rem;
+}
+
+/* ============================
+   Admin Actions Section
+   ============================ */
+
+.admin-actions {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+.action-card {
+  background: #ffffff;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.action-header {
+  padding: 1.1rem 1.5rem;
+  background: #0f75bc;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-header h4 {
+  margin: 0;
+  color: #f9fafe;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.action-form {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.action-form input,
+.action-form select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #c7d7e2;
+  background: #f9fafe;
+  font-size: 1rem;
+}
+
+.action-form input:focus,
+.action-form select:focus {
+  border-color: #0f75bc;
+  outline: none;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.input-wrapper label {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+/* ============================
+   Mobile Responsive Design
+   ============================ */
+
+@layer mobile {
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+
+    .profile {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile h2 {
+      font-size: 1.4rem;
+    }
+
+    .profile p,
+    .email {
+      font-size: 0.9rem;
+    }
+
+    .calendar-section {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .calendar-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .react-calendar {
+      padding: 0.8rem;
+    }
+
+    .event-card-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .event-card {
+      padding: 1rem;
+    }
+
+    .event-card h4 {
+      font-size: 1rem;
+    }
+
+    .event-summary h4 {
+      font-size: 1rem;
+    }
+
+    .events-table {
+      font-size: 0.85rem;
+    }
+
+    .events-table th,
+    .events-table td {
+      padding: 8px;
+    }
+
+    .event-grid h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .action-header {
+      padding: 0.9rem 1.2rem;
+    }
+
+    .action-header h4 {
+      font-size: 1rem;
+    }
+
+    .action-form {
+      padding: 1.2rem;
+      gap: 0.8rem;
+    }
+
+    .absent-btn,
+    .decline-btn,
+    .close-btn,
+    .action-btn,
+    .delete-btn {
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0.8rem;
+    }
+
+    .profile {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .profile h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile p,
+    .email {
+      font-size: 0.85rem;
+    }
+
+    .calendar-section {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .calendar-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .react-calendar {
+      padding: 0.5rem;
+    }
+
+    .event-card {
+      padding: 0.8rem;
+    }
+
+    .event-card h4 {
+      font-size: 0.95rem;
+    }
+
+    .event-card p {
+      font-size: 0.85rem;
+    }
+
+    .events-table {
+      font-size: 0.75rem;
+    }
+
+    .events-table th,
+    .events-table td {
+      padding: 6px;
+    }
+
+    .event-grid h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .action-form {
+      padding: 1rem;
+      gap: 0.7rem;
+    }
+
+    .absent-btn,
+    .decline-btn,
+    .close-btn,
+    .action-btn,
+    .delete-btn {
+      padding: 0.6rem 0.9rem;
+      font-size: 0.85rem;
+    }
+  }
+}

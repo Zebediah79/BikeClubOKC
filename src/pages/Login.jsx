@@ -18,9 +18,10 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      console.log("---- LOGIN ATTEMPT ----");
-      console.log("Role:", role);
-      console.log("Email:", email);
+      // console.error(err);
+      //console.log("---- LOGIN ATTEMPT ----");
+      //console.log("Role:", role);
+      //console.log("Email:", email);
 
       let jwtToken;
 
@@ -31,7 +32,7 @@ export default function Login() {
         jwtToken = await volunteerLogin(email, password);
       }
 
-      console.log("🔥 RAW TOKEN RECEIVED:", jwtToken);
+      //console.log(" RAW TOKEN RECEIVED:", jwtToken);
 
       // Store token + role in AuthProvider
       login(jwtToken, role); // ⭐ SEND BOTH TOKEN + ROLE
@@ -50,9 +51,9 @@ export default function Login() {
     const storedRole = localStorage.getItem("role");
     const isFacilitator = localStorage.getItem("isFacilitator") === "true";
 
-    console.log("➡️ Continue clicked:");
-    console.log("Stored role:", storedRole);
-    console.log("Facilitator:", isFacilitator);
+    //console.log("➡️ Continue clicked:");
+    //console.log("Stored role:", storedRole);
+    //console.log("Facilitator:", isFacilitator);
 
     if (storedRole === "parent") {
       window.location.href = "/parent";

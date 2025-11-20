@@ -47,16 +47,16 @@ export default function Parent() {
       try {
         console.log("Loading parent profile:", userId);
 
-        // 1️⃣ Parent Profile
+        // 1️ Parent Profile
         const parentData = await fetchParentProfile(userId, token);
         setParent(parentData);
 
-        // 2️⃣ Student List
+        // 2️ Student List
         const studentList = await fetchParentStudents(userId, token);
         setStudents(studentList);
         console.log("Students loaded:", studentList);
 
-        // 3️⃣ Load events per student
+        // 3️Load events per student
         let allEvents = [];
 
         for (let student of studentList) {
@@ -83,7 +83,7 @@ export default function Parent() {
           allEvents.push(...formattedEvents);
         }
 
-        // 4️⃣ Deduplicate events (each student has their own copy)
+        // 4️ Deduplicate events (each student has their own copy)
         const deduped = Array.from(
           new Map(allEvents.map((e) => [e.key, e])).values()
         );

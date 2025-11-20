@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-import "./Navbar.css";
+import "../stylings/Navbar.css";
 
 export default function Navbar() {
   const { role, isFacilitator, token, logout } = useAuth();

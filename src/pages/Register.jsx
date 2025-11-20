@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css";
+import "../stylings/Register.css";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -38,10 +38,10 @@ export default function Register() {
       const result = await response.json();
       console.log(result);
 
-      alert("Registration submitted!");
+      // alert("Registration submitted!");
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Failed to submit");
+      // alert("Failed to submit");
     }
   };
 
